@@ -210,6 +210,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
     Route::resource('timeslots', 'TimeslotController');
     Route::resource('sliders', 'SliderController');
     Route::resource('consultations', 'ConsultationController');
+    Route::get('notices', 'NoticeController@getNotices');
+    Route::post('notices/update', 'NoticeController@updateNotice');
+    Route::get('notices/view/{id}', 'NoticeController@viewNotice');
+
+    Route::post('executions/update', 'ExecutionController@updateExecution');
+    Route::get('executions/view/{id}', 'ExecutionController@viewExecution');   
+    Route::get('executions', 'ExecutionController@getExecutions');
     
 
 
