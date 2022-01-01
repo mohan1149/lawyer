@@ -28,6 +28,8 @@
                 
                 <li><a href="/admin/notices"><i class="fa fa-users"></i>  {{__("t.notices")}} </a>
                 <li><a href="/admin/executions"><i class="fa fa-users"></i>  {{__("t.executions")}} </span></a>
+                <li><a href="/admin/case/levels"><i class="fa fa-users"></i>  {{__("t.case_levels")}} </span></a>
+                <li><a href="/admin/case/roll"><i class="fa fa-users"></i>  {{__("t.roll")}} </span></a>
                 <li><a><i class="fa fa-users"></i>  {{__("t.team_members")}} <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="{{ url('admin/client_user') }}"> {{__('t.team_member')}}</a></li>
