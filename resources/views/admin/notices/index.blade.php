@@ -14,7 +14,7 @@
                                 <tr>
                                     <th>{{__("t.case_number")}}</th>
                                     <th>{{__("t.client")}}</th>
-                                    <th>{{__("t.againt")}}</th>
+                                    <th>{{__("t.against")}}</th>
                                     <th>{{__("t.status")}}</th>
                                     <th data-orderable="false" class="text-center">{{__("t.action")}}</th>
                                 </tr>
@@ -35,7 +35,7 @@
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                   <div class="modal-content">
                                                     <div class="modal-header">
-                                                      <h5 class="modal-title" id="exampleModalLongTitle">{{ __("t.add_execution") }}</h5>
+                                                      <h5 class="modal-title" id="exampleModalLongTitle">{{ __("t.notice_send") }}</h5>
                                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                       </button>

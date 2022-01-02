@@ -644,7 +644,10 @@ class CaseRunningController extends Controller
             // $case->updated_by           = "1";
             $case->updated_by = Auth::guard('admin')->user()->id;
             $case->save();
-
+            DB::table('case_levels')->insert([
+                'case_id'=>$case->id,
+                'level_id'=>1,
+            ]);
 
             if (isset($request->assigned_to) && count($request->assigned_to)) {
                 foreach ($request->assigned_to as $key => $value) {

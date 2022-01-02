@@ -14,7 +14,7 @@
                                 <tr>
                                     <th>{{__("t.case_number")}}</th>
                                     <th>{{__("t.client")}}</th>
-                                    <th>{{__("t.againt")}}</th>
+                                    <th>{{__("t.against")}}</th>
                                     <th>{{__("t.status")}}</th>
                                     <th data-orderable="false" class="text-center">{{__("t.action")}}</th>
                                 </tr>

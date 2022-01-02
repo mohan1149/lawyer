@@ -364,7 +364,27 @@ return [
     'yes'		 => "نعم",
     'no' 		=> "لا", 
     'phone' 		=> "الهاتف",
-    'submitted_on' 		=> "تم إرساله"
+    'submitted_on' 		=> "تم إرساله",
+    'case_number'=>'Case Number',
+    'No'=>'No',
+    'publish'=>'Publish',
+    'send_to_client'=>"Send to Client",
+    'petitioner_and_advocate'=>'Petitioner & Advocate',
+    'acts'=>'Acts',
+    'undee_acts'=>'Under Acts',
+    'history_of_case_hearing'=>'Histoty Of Case Hearing',
+    'registration_number'=>'Registration Number',
+    'Case_Transfer_Details_Between_The_Courts'=>'Case Transfer Details Between The Courts',
+    'Regn_Number'=> 'Regn Number',
+    'Transfer_Date' =>'Transfer Date',
+    'From_Court_Number_and_Judge'=>'From Court Number and Judge',
+    'To_Court_Number_and_Judge'=>'To Court Number and Judge',
+    'invoice_id'=>'Invoice ID',
+    'amount_received'=>'Amount Received',
+    'payment_type'=>'Payment Type',
+    'court_number_and_judge'=>'Court Number And Judge',
+    'user_documents' => 'User Documents',
+    'open'=> 'Open',
 
 
 

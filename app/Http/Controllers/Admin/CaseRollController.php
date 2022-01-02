@@ -85,7 +85,6 @@ class CaseRollController extends Controller
     }
     public function pdfRoll($cases){
         try {
-            //return view('admin.roll.pdf',['cases'=>$cases]);
             $pdf = PDF::loadView('admin.roll.pdf',['cases'=>$cases]);
             return $pdf->stream();
         } catch (\Exception $e) {
