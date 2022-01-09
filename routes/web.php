@@ -221,9 +221,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
     Route::get('case/level/view/{id}/{level}','CaseLevelController@viewCaseLevel');
     Route::post('level/save/{id}','CaseLevelController@saveLevel');
     Route::get('case/level/history/{id}','CaseLevelController@levelHistory');
+    Route::get('case/hearing/history/{id}','CaseRunningController@hearingHistory');
     Route::post('case/level-up','CaseLevelController@updateLevel');
     Route::get('case/roll','CaseRollController@getCaseRoll');
     Route::get('case/roll/pdf','CaseRollController@pdfRoll');
+    Route::post('case/add/hearing','CaseRunningController@addHearing');
+    
     
 });
 

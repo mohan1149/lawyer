@@ -601,95 +601,136 @@ class CaseRunningController extends Controller
      */
     public function store(Request $request)
     {
-        //Apply validation
         $input = $request->all();
-        // dd( $input);
-
-        $validatedData = $this->validator_case($input);
         $index = 0;
-        if ($validatedData->passes()) {
-
-            $case = new CourtCase();
-
-            $case->advocate_id = "1";
-            $case->advo_client_id = $request->client_name;
-            $case->client_position = $request->position;
-            $case->party_name = $request->input('parties_detail.' . $index . '.party_name');
-            $case->party_lawyer = $request->input('parties_detail.' . $index . '.party_advocate');
-            $case->case_number = $request->case_no;
-            $case->case_types = $request->case_type;
-            $case->case_sub_type = $request->case_sub_type;
-            $case->case_status = $request->case_status;
-            $case->act = $request->act;
-            $case->priority = $request->priority;
-            $case->court_no = $request->court_no;
-            $case->court_type = $request->court_type;
-            $case->court = $request->court_name;
-            $case->judge_type = $request->judge_type;
-            $case->judge_name = $request->judge_name;
-            $case->filing_number = $request->filing_number;
-            $case->filing_date = date('Y-m-d H:i:s', strtotime(LogActivity::commonDateFromat($request->filing_date)));
-            $case->registration_number = $request->registration_number;
-            $case->registration_date = date('Y-m-d H:i:s', strtotime(LogActivity::commonDateFromat($request->registration_date)));
-            if ($request->next_date != '') {
-                $case->first_hearing_date = date('Y-m-d H:i:s', strtotime(LogActivity::commonDateFromat($request->next_date)));
-                $case->next_date = date('Y-m-d H:i:s', strtotime(LogActivity::commonDateFromat($request->next_date)));
-            }
-            $case->cnr_number = $request->cnr_number;
-            $case->remark = $request->remarks;
-            $case->description = $request->description;
-            $case->police_station = $request->police_station;
-            $case->fir_number = $request->fir_number;
-            $case->fir_date = ($request->fir_date != '') ? date('Y-m-d', strtotime(LogActivity::commonDateFromat($request->fir_date))) : null;
-            // $case->updated_by           = "1";
-            $case->updated_by = Auth::guard('admin')->user()->id;
-            $case->save();
-            DB::table('case_levels')->insert([
-                'case_id'=>$case->id,
-                'level_id'=>1,
-            ]);
-
-            if (isset($request->assigned_to) && count($request->assigned_to)) {
-                foreach ($request->assigned_to as $key => $value) {
-                    # Arrary in assigne employee...
-                    $taskMember = new CaseMember();
-                    $taskMember->case_id = $case->id;
-                    $taskMember->employee_id = $value;
-                    $taskMember->save();
-                }
-            }
-
-
-            if ($case->id) {
-                //Add records to parties table for multiple records or single.
-                if (!empty($request->parties_detail)) {
-                    foreach ($request->parties_detail as $key => $val) {
-                        //echo  $request->input('parties_detail.'.$key.'.party_name').'=>'.'<br/>';
-                        $party = new CasePartiesInvolves();
-                        $party->court_case_id = $case->id;
-                        $party->position = $case->client_position;
-                        $party->party_name = $request->input('parties_detail.' . $key . '.party_name');
-                        $party->party_advocate = $request->input('parties_detail.' . $key . '.party_advocate');
-                        $party->save();
-                    }
-                }
-                $caseLog = new CaseLog();
-
-                $caseLog->advocate_id = "1";
-                $caseLog->court_case_id = $case->id;
-                $caseLog->judge_type = $request->judge_type;
-                $caseLog->case_status = $request->case_status;
-                $caseLog->court_no = $request->court_no;
-                $caseLog->judge_name = $request->judge_name;
-                $caseLog->bussiness_on_date = date('Y-m-d H:i:s', strtotime(LogActivity::commonDateFromat($request->next_date)));
-                // $caseLog->updated_by           = "1";
-                $caseLog->updated_by = Auth::guard('admin')->user()->id;
-                $caseLog->save();
-            }
-
-            return redirect()->route('case-running.index')->with('success', "Case added successfully.");
+        $case = new CourtCase();
+        $case->advocate_id = "1";
+        $case->advo_client_id = $request->client_name;
+        $case->client_position = $request->position;
+        $case->party_name = $request->input('parties_detail.' . $index . '.party_name');
+        $case->party_lawyer = $request->input('parties_detail.' . $index . '.party_advocate');
+        $case->case_number = $request->case_no;
+        $case->case_types = $request->case_type;
+        $case->case_sub_type = $request->case_sub_type;
+        $case->case_status = $request->case_status;
+        $case->act = $request->act;
+        $case->priority = $request->priority;
+        $case->court_no = $request->court_no;
+        $case->court_type = $request->court_type;
+        $case->court = $request->court_name;
+        $case->judge_type = $request->judge_type;
+        $case->judge_name = $request->judge_name;
+        $case->filing_number = $request->filing_number;
+        $case->filing_date = date('Y-m-d H:i:s', strtotime(LogActivity::commonDateFromat($request->filing_date)));
+        $case->registration_number = $request->registration_number;
+        $case->registration_date = date('Y-m-d H:i:s', strtotime(LogActivity::commonDateFromat($request->registration_date)));
+        if ($request->next_date != '') {
+            $case->first_hearing_date = date('Y-m-d H:i:s', strtotime(LogActivity::commonDateFromat($request->next_date)));
+            $case->next_date = date('Y-m-d H:i:s', strtotime(LogActivity::commonDateFromat($request->next_date)));
         }
-        return back()->with('errors', $validatedData->errors());
+        $case->cnr_number = $request->cnr_number;
+        $case->remark = $request->remarks;
+        $case->description = $request->description;
+        $case->police_station = $request->police_station;
+        $case->fir_number = $request->fir_number;
+        $case->fir_date = ($request->fir_date != '') ? date('Y-m-d', strtotime(LogActivity::commonDateFromat($request->fir_date))) : null;
+        $case->updated_by = Auth::guard('admin')->user()->id;
+        $case->case_level = $request['case_level'];
+        $case->save();
+        $input[] = ['case_id'=>$case->id];
+        // DB::table('case_step_levels')->insert([
+        //     'case_id'=>$case->id,
+        //     'case_level'=>$request['case_level'],
+        //     'detective'=>$request['detective'],
+        //     'police_decision'=>$request['police_decision'],
+        //     'police_decision_date'=>$request['police_decision_date'],
+        //     'police_release_date'=>$request['police_release_date'],
+        //     'police_warranty_value'=>$request['police_warranty_value'],
+        //     'police_date_payment'=>$request['police_date_payment'],
+        //     'pros_type'=>$request['pros_type'],
+        //     'pros_name'=>$request['pros_name'],
+        //     'pros_sec_name'=>$request['pros_summon_date'],
+        //     'pros_summon_date'=>$request['pros_summon_date'],
+        //     'pros_next_summon_date'=>$request['pros_next_summon_date'],
+        //     'pros_decision'=>$request['pros_decision'],
+        //     'pros_decision_date'=>$request['pros_decision_date'],
+        //     'pros_release_date'=>$request['pros_release_date'],
+        //     'pros_warranty'=>$request['pros_warranty'],
+        //     'pros_date_pay'=>$request['pros_date_pay'],
+        //     'fd_jud_dept'=>$request['fd_jud_dept'],
+        //     'fd_floor'=>$request['fd_floor'],
+        //     'fd_room'=>$request['fd_room'],
+        //     'fd_sec'=>$request['fd_sec'],
+        //     'fd_last_hear'=>$request['fd_last_hear'],
+        //     'fd_next_hear'=>$request['fd_next_hear'],
+        //     'fd_last_req'=>$request['fd_last_req'],
+        //     'fd_now_req'=>$request['fd_now_req'],
+        //     'fd_statement'=>$request['fd_statement'],
+        //     'fd_judge_date'=>$request['fd_judge_date'],
+        //     'res_court_type'=>$request['res_court_type'],
+        //     'res_floor'=>$request['res_floor'],
+        //     'res_room'=>$request['res_room'],
+        //     'res_date'=>$request['res_date'],
+        //     'res_jud_dept'=>$request['res_jud_dept'],
+        //     'res_court_sec'=>$request['res_court_sec'],
+        //     'res_hear_req'=>$request['res_hear_req'],
+        //     'res_judge_date'=>$request['res_judge_date'],
+        //     'excel_court_type'=>$request['excel_court_type'],
+        //     'excel_floor'=>$request['excel_floor'],
+        //     'excel_room'=>$request['excel_room'],
+        //     'excel_date'=>$request['excel_date'],
+        //     'excel_jud_dept'=>$request['excel_jud_dept'],
+        //     'excel_court_sec'=>$request['excel_court_sec'],
+        //     'excel_hear_req'=>$request['excel_hear_req'],
+        //     'exp_court_type'=>$request['exp_court_type'],
+        //     'exp_floor'=>$request['exp_floor'],
+        //     'exp_room'=>$request['exp_room'],
+        //     'exp_date'=>$request['exp_date'],
+        //     'exp_jud_dept'=>$request['exp_jud_dept'],
+        //     'exp_name'=>$request['exp_name'],
+        //     'exp_section'=>$request['exp_section'],
+        //     'exp_hear_req'=>$request['exp_hear_req'],
+        //     'shapes_date'=>$request['shapes_date'],
+        //     'shapes_floor'=>$request['shapes_floor'],
+        //     'shapes_room'=>$request['shapes_room'],
+        //     'shapes_num'=>$request['shapes_num'],
+        //     'shapes_sec'=>$request['shapes_sec'],
+        //     'shapes_jud_dept'=>$request['shapes_jud_dept'],
+        //     'shapes_hear_req'=>$request['shapes_hear_req'],
+        // ]);
+
+        if (isset($request->assigned_to) && count($request->assigned_to)) {
+            foreach ($request->assigned_to as $key => $value) {
+                # Arrary in assigne employee...
+                $taskMember = new CaseMember();
+                $taskMember->case_id = $case->id;
+                $taskMember->employee_id = $value;
+                $taskMember->save();
+            }
+        }
+        if ($case->id) {
+            if (!empty($request->parties_detail)) {
+                foreach ($request->parties_detail as $key => $val) {
+                    $party = new CasePartiesInvolves();
+                    $party->court_case_id = $case->id;
+                    $party->position = $case->client_position;
+                    $party->party_name = $request->input('parties_detail.' . $key . '.party_name');
+                    $party->party_advocate = $request->input('parties_detail.' . $key . '.party_advocate');
+                    $party->save();
+                }
+            }
+            $caseLog = new CaseLog();
+            $caseLog->advocate_id = "1";
+            $caseLog->court_case_id = $case->id;
+            $caseLog->judge_type = $request->judge_type;
+            $caseLog->case_status = $request->case_status;
+            $caseLog->court_no = $request->court_no;
+            $caseLog->judge_name = $request->judge_name;
+            $caseLog->bussiness_on_date = date('Y-m-d H:i:s', strtotime(LogActivity::commonDateFromat($request->next_date)));
+            $caseLog->updated_by = Auth::guard('admin')->user()->id;
+            $caseLog->save();
+        }
+        return redirect()->route('case-running.index')->with('success', "Case added successfully.");
     }
 
     /**
@@ -748,7 +789,7 @@ class CaseRunningController extends Controller
             ->select('case.id AS case_id', 'case.advo_client_id AS client_id', 'case.next_date', 'case.decision_date', 'case.nature_disposal', 'case.client_position', 'case.party_name', 'case.party_lawyer', 'case.case_number', 'case.act', 'case.priority',
                 'case.court_no', 'case.judge_name', 'ct.case_type_name AS caseType', 'cst.case_type_name AS caseSubType',
                 's.case_status_name', 't.court_type_name', 'c.court_name', 'j.judge_name', DB::raw('CONCAT(ac.first_name, " ", ac.middle_name, " " ,ac.last_name) AS full_name'), 'case.filing_number', 'case.filing_date', 'case.registration_number', 'case.registration_date',
-                'case.remark', 'case.description', 'case.cnr_number', 'case.first_hearing_date', 'case.case_number'
+                'case.remark', 'case.description', 'case.cnr_number', 'case.first_hearing_date', 'case.case_number','case.case_level'
             )
             ->where('case.id', $id)
             ->first();
@@ -757,11 +798,21 @@ class CaseRunningController extends Controller
         $data = $this->getRespon($case->client_id, $case->case_id, $case->client_position);
 
         $data['case'] = $case;
+        $data['courtTypes'] = CourtType::where('is_active', 'Yes')
+        ->orderBy('court_type_name', 'asc')
+        ->get();
+
         $data['docuemts'] = [
             'id'=>$id,
             'documents' => DB::table('case_documents')->where('case_id',$id)->get(),
         ];
-
+        $data['current_level'] = DB::table('court_cases as case')
+            ->leftJoin('case_hearings as hearing','case.case_current_hearing','=','hearing.hid')
+            ->leftJoin('case_levels as level','case.case_level','=','level.case_level')
+            ->where('case.id',$id)
+            ->where('level.case_level',$case->case_level)
+            ->orderBy('level.lid','DES')
+            ->first();
         return view('admin.case.view.view_case_details', $data);
     }
 
@@ -1518,12 +1569,120 @@ class CaseRunningController extends Controller
 	    try{
 		    $current = Carbon::today();	    
 		    $endDate = Carbon::today()->addDays(10);
-		$notif = DB::table('court_cases')->whereBetween('next_date', [$current, $endDate])->get();
-		return view("admin.case.urgent",['notif'=>$notif]);
-	}catch(\Exception $e){
-		return view("admin.case.urgent",['notif'=>[]]);
-	}
+		    $notif = DB::table('court_cases')->whereBetween('next_date', [$current, $endDate])->get();
+		    return view("admin.case.urgent",['notif'=>$notif]);
+	    }catch(\Exception $e){
+		    return view("admin.case.urgent",['notif'=>[]]);
+	    }
     }
 
+
+    public function addLevel(Request $request){
+        try {
+            DB::table('case_step_levels')->insert([
+                'case_id'=>$request['case_id'],
+                'case_level'=>$request['case_level'],
+                'detective'=>$request['detective'],
+                'police_decision'=>$request['police_decision'],
+                'police_decision_date'=>$request['police_decision_date'],
+                'police_release_date'=>$request['police_release_date'],
+                'police_warranty_value'=>$request['police_warranty_value'],
+                'police_date_payment'=>$request['police_date_payment'],
+                'pros_type'=>$request['pros_type'],
+                'pros_name'=>$request['pros_name'],
+                'pros_sec_name'=>$request['pros_summon_date'],
+                'pros_summon_date'=>$request['pros_summon_date'],
+                'pros_next_summon_date'=>$request['pros_next_summon_date'],
+                'pros_decision'=>$request['pros_decision'],
+                'pros_decision_date'=>$request['pros_decision_date'],
+                'pros_release_date'=>$request['pros_release_date'],
+                'pros_warranty'=>$request['pros_warranty'],
+                'pros_date_pay'=>$request['pros_date_pay'],
+                'fd_jud_dept'=>$request['fd_jud_dept'],
+                'fd_floor'=>$request['fd_floor'],
+                'fd_room'=>$request['fd_room'],
+                'fd_sec'=>$request['fd_sec'],
+                'fd_last_hear'=>$request['fd_last_hear'],
+                'fd_next_hear'=>$request['fd_next_hear'],
+                'fd_last_req'=>$request['fd_last_req'],
+                'fd_now_req'=>$request['fd_now_req'],
+                'fd_statement'=>$request['fd_statement'],
+                'fd_judge_date'=>$request['fd_judge_date'],
+                'res_court_type'=>$request['res_court_type'],
+                'res_floor'=>$request['res_floor'],
+                'res_room'=>$request['res_room'],
+                'res_date'=>$request['res_date'],
+                'res_jud_dept'=>$request['res_jud_dept'],
+                'res_court_sec'=>$request['res_court_sec'],
+                'res_hear_req'=>$request['res_hear_req'],
+                'res_judge_date'=>$request['res_judge_date'],
+                'excel_court_type'=>$request['excel_court_type'],
+                'excel_floor'=>$request['excel_floor'],
+                'excel_room'=>$request['excel_room'],
+                'excel_date'=>$request['excel_date'],
+                'excel_jud_dept'=>$request['excel_jud_dept'],
+                'excel_court_sec'=>$request['excel_court_sec'],
+                'excel_hear_req'=>$request['excel_hear_req'],
+                'exp_court_type'=>$request['exp_court_type'],
+                'exp_floor'=>$request['exp_floor'],
+                'exp_room'=>$request['exp_room'],
+                'exp_date'=>$request['exp_date'],
+                'exp_jud_dept'=>$request['exp_jud_dept'],
+                'exp_name'=>$request['exp_name'],
+                'exp_section'=>$request['exp_section'],
+                'exp_hear_req'=>$request['exp_hear_req'],
+                'shapes_date'=>$request['shapes_date'],
+                'shapes_floor'=>$request['shapes_floor'],
+                'shapes_room'=>$request['shapes_room'],
+                'shapes_num'=>$request['shapes_num'],
+                'shapes_sec'=>$request['shapes_sec'],
+                'shapes_jud_dept'=>$request['shapes_jud_dept'],
+                'shapes_hear_req'=>$request['shapes_hear_req'],
+            ]);
+            DB::table('court_cases')->where('id',$request['case_id'])->update(['case_level'=>$request['case_level']]);
+            return redirect('admin/case-running/'.$request['case_id']);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function addHearing(Request $request){
+        try{
+            $hid = DB::table('case_hearings')->insertGetId([
+                'case_id'=>$request['case_id'],
+                'case_level'=>$request['case_level'],
+                'judcial_dept'=>$request['judcial_dept'],
+                'floor'=>$request['floor'],
+                'room'=>$request['room'],
+                'court_secretary'=>$request['court_secretary'],
+                'last_hearing'=>$request['last_hearing'],
+                'next_hearing'=>$request['next_hearing'],
+                'last_requirements'=>$request['last_requirements'],
+                'current_requirements'=>$request['current_requirements'],
+                'hearing_statement'=>$request['hearing_statement'],
+                'date_of_resumptopn'=>$request['date_of_resumption'],
+                'date_of_excellence'=>$request['date_of_excellence'],
+                'date_of_expert'=>$request['date_of_expert'],
+                'expert_name'=>$request['expert_name'],
+                'section'=>$request['section'],
+                'date_of_shapes'=>$request['date_of_shapes'],
+                'shape_number'=>$request['shape_number'],
+            ]);
+            DB::table('court_cases')->where('id',$request['case_id'])->update(['case_current_hearing'=>$hid]);
+            return redirect('admin/case-running/'.$request['case_id']);
+            //case_current_hearing
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function hearingHistory(Request $request){
+        try {
+            $history  = DB::table('case_hearings')->where('case_id',$request['id'])->get();
+            return view('admin.case.view.hearing_history',['history'=>$history]);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }        
+    }
 
 }

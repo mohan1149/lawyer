@@ -55,63 +55,28 @@ class CaseLevelController extends Controller
 
     public function saveLevel(Request $request){
         try {
-            $case_id = $request['id'];
-            $level = $request['level'];
-            $floor = $request['floor'];
-            $room  = $request['room'];
-            $expert = $request['expert'];
-            $secratery = $request['secretary'];
-            $pre_req  = $request['prev_request'];
-            $pre_res = $request['pre_response'];
-            $next_req = $request['next_request'];
-            $next_res = $request['next_response'];
-            $notes = $request['notes'];
-            $options = [
-                'floor'=>$floor,
-                'room'=>$room,
-                'secretary'=>$secratery,
-                'expert'=>$expert,
-                'prev_request'=>$pre_req,
-                'pre_response'=>$pre_res,
-                'next_request'=>$next_req,
-                'next_response'=>$next_res,
-                'level_notes'=>$notes,
-            ];
-            if($floor == "") {
-                unset($options['floor']);
-            }
-            if($room == "") {
-                unset($options['room']);
-            }
-            if($expert == ""){
-                unset($options['expert']);
-            }
-            if($secratery == ""){
-                unset($options['secretary']);
-            }
-            if($pre_req == ""){
-                unset($options['prev_request']);
-            }
-            if($pre_res == ""){
-                unset($options['pre_response']);
-            }
-            if($next_req == ""){
-                unset($options['next_request']);
-            }
-            if($next_res == ""){
-                unset($options['next_response']);
-            }
-            if($notes == ""){
-                unset($options['level_notes']);
-            }
-            DB::table('case_levels')
-                ->where('case_id',$case_id)
-                ->where('level_id',$level)
-                ->update($options);
-            return redirect('/admin/case/levels');
+            DB::table('case_levels')->insert([
+                'case_id'=>$request['id'],
+                'case_num'=>$request['case_number'],
+                'case_level'=>$request['case_level'],
+                'level_notes'=>$request['level_notes'],
+                'ps_station'=>$request['police_station'],
+                'officer'=>$request['officer'],
+                'reg_date'=>$request['reg_date'],
+                'decision'=>$request['decision'],
+                'dec_date'=>$request['dec_date'],
+                'rel_date'=>$request['rel_date'],
+                'warranty'=>$request['warranty'],
+                'date_payment'=>$request['date_payment'],
+                'pros_type'=>$request['pros_type'],
+                'pros_name'=>$request['officer'],
+                'pros_summon'=>$request['summon'],
+                'pros_next_summon_date'=>$request['summon_next'],
+            ]);
+            DB::table('court_cases')->where('id',$request['id'])->update(['case_level'=>$request['case_level']]);
+            return redirect('/admin/case-running/'.$request['id']);
         } catch (\Exception $e) {
             return $e->getMessage();
-            return abort(500,'IES');
         }
     }
 
@@ -137,7 +102,6 @@ class CaseLevelController extends Controller
             $case_id = $request['id'];
             $levels = DB::table('case_levels')
                 ->where('case_id',$case_id)
-                //->orderBy('level_id','ASC')
                 ->get();
             return view('admin.levels.history',['levels'=>$levels]);
         } catch (\Exception $e) {

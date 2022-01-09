@@ -100,7 +100,403 @@
         </div>
 
     </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <h3>{{ __("t.case_level") }} - <strong style="text-transform: uppercase">{{ $case->case_level.' ' }}</strong><a class="btn btn-success" href="/admin/case/level/history/{{ $case->case_id }}" rel="noopener">{{ __("t.level_history") }}</a></h3>
+                    <div class="clearfix"></div>
+                    <div class="accordion" id="case_view_accordian">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    {{ __("t.add_hearing") }}
+                                </button>
+                            </div>
+                            <div class="panel-body">
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#case_view_accordian">
+                                    <div class="">
+                                        <div class="level_form">
+                                            <form action="/admin/case/add/hearing" method="POST">
+                                                @csrf
+                                                <div class="row">
+                                                    <input type="hidden" name="case_id" value="{{ $case->case_id }}">
+                                                    <input type="hidden" name="case_level" value="{{ $case->case_level }}">
+                                                    <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                        <label for="judcial_dept">{{ __("t.judcial_dept") }}</label>
+                                                        <input type="text" class="form-control" name="judcial_dept">
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                        <label for="floor">{{ __("t.floor") }}</label>
+                                                        <input type="text" class="form-control" name="floor">
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                        <label for="room">{{ __("t.room") }}</label>
+                                                        <input type="text" class="form-control" name="room">
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                        <label for="court_secretary">{{ __("t.court_secretary") }}</label>
+                                                        <input type="text" class="form-control" name="court_secretary">
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                        <label for="last_hearing">{{ __("t.last_hearing") }}</label>
+                                                        <input type="date" class="form-control" name="last_hearing">
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                        <label for="next_hearing">{{ __("t.next_hearing") }}</label>
+                                                        <input type="date" class="form-control" name="next_hearing">
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                        <label for="last_requirements">{{ __("t.last_requirements") }}</label>
+                                                        <input type="text" class="form-control" name="last_requirements">
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                        <label for="current_requirements">{{ __("t.current_requirements") }}</label>
+                                                        <input type="text" class="form-control" name="current_requirements">
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                        <label for="hearing_statement">{{ __("t.hearing_statement") }}</label>
+                                                        <input type="text" class="form-control" name="hearing_statement">
+                                                    </div>
+                                                    @if ($case->case_level == 'resumption')
+                                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                            <label for="date_of_resumption">{{ __("t.date_of_resumption") }}</label>
+                                                        <input type="date" class="form-control" name="date_of_resumption">
+                                                        </div>
+                                                    @endif
+                                                    @if ($case->case_level == 'excellece')
+                                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                            <label for="date_of_excellence">{{ __("t.date_of_excellence") }}</label>
+                                                            <input type="date" class="form-control" name="date_of_excellence">
+                                                        </div>
+                                                    @endif
+                                                    
+                                                    @if ($case->case_level == 'expert')
+                                                    <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                        <label for="date_of_expert">{{ __("t.date_of_expert") }}</label>
+                                                        <input type="date" class="form-control" name="date_of_expert">
+                                                    </div>
+                                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                            <label for="expert_name">{{ __("t.expert_name") }}</label>
+                                                            <input type="text" class="form-control" name="expert_name">
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                            <label for="section">{{ __("t.section") }}</label>
+                                                            <input type="text" class="form-control" name="section">
+                                                        </div>
+                                                    @endif
+                                                    @if ($case->case_level == 'shapes')
+                                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                            <label for="date_of_shapes">{{ __("t.date_of_shapes") }}</label>
+                                                            <input type="date" class="form-control" name="date_of_shapes">
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                            <label for="shape_number">{{ __("t.shape_number") }}</label>
+                                                            <input type="text" class="form-control" name="shape_number">
+                                                        </div> 
+                                                    @endif
+                                                    <div class="clearfix"></div>
+                                                    <div class="col-md-2">
+                                                        <input class="btn btn-primary" type="submit" value="{{ __("t.add") }}">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                                    {{ __("t.add_judgement") }}
+                                </button>
+                            </div>
+                            <div class="panel-body">
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#case_view_accordian">
+                                    new form
+                                </div>
+                            </div>
+                        </div> --}}
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+                                    {{ __("t.update_level") }}
+                                </button>
+                            </div>
+                            <div class="panel-body">
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#case_view_accordian">
+                                    <form action="/admin/level/save/{{ $case->case_id }}" method="POST">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                <label for="fullname">{{__("t.case_level")}} <span class="text-danger">*</span></label>
+                                                <select name="case_level" id="level_controller" class="form-control">
+                                                    <option value="undefined">-----</option>
+                                                    @if ($case->case_level != 'police')
+                                                    <option value="police">{{ __("t.police") }}</option>
+                                                    @endif
+                                                    @if ($case->case_level != 'prosecution')
+                                                    <option value="prosecution">{{ __("t.prosecution") }}</option>
+                                                    @endif
+                                                    @if ($case->case_level != 'first-degree')
+                                                    <option value="first-degree">{{ __("t.first-degree") }}</option>
+                                                    @endif
+                                                    @if ($case->case_level != 'resumption')
+                                                    <option value="resumption">{{ __("t.resumption") }}</option>
+                                                    @endif
+                                                    @if ($case->case_level != 'excellence')
+                                                    <option value="excellence">{{ __("t.excellence") }}</option>
+                                                    @endif
+                                                    @if ($case->case_level != 'expert')
+                                                    <option value="expert">{{ __("t.expert") }}</option>
+                                                    @endif
+                                                    @if ($case->case_level != 'shapes')
+                                                    <option value="shapes">{{ __("t.shapes") }}</option>
+                                                    @endif
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                                <label for="case_number">{{ __("t.case_number") }}</label>
+                                                <input type="text" name="case_number" class="form-control">
+                                            </div>
+                                            {{-- police --}}
+                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                                    <label for="police_station">{{ __("t.police_station") }}</label>
+                                                    <input type="text" name="police_station" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                                    <label for="officer">{{ __("t.officer") }}</label>
+                                                    <input type="text" name="officer" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                                    <label for="reg_date">{{ __("t.reg_date") }}</label>
+                                                    <input type="date" name="reg_date" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                                    <label for="decision">{{ __("t.decision") }}</label>
+                                                    <input type="text" name="decision" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                                    <label for="dec_date">{{ __("t.dec_date") }}</label>
+                                                    <input type="date" name="dec_date" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                                    <label for="rel_date">{{ __("t.rel_date") }}</label>
+                                                    <input type="date" name="rel_date" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                                    <label for="warranty">{{ __("t.warranty") }}</label>
+                                                    <input type="text" name="warranty" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                                    <label for="date_payment">{{ __("t.date_payment") }}</label>
+                                                    <input type="date" name="date_payment" class="form-control">
+                                                </div>
+                                            {{-- end --}}
+                                            {{-- pros --}}
+                                            <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                                <label for="pros_type">{{ __("t.pros_type") }}</label>
+                                                <input type="text" name="pros_type" class="form-control">
+                                            </div>
+                                            <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                                <label for="officer">{{ __("t.officer") }}</label>
+                                                <input type="text" name="officer" class="form-control">
+                                            </div>
+                                            <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                                <label for="summon">{{ __("t.summon") }}</label>
+                                                <input type="date" name="summon" class="form-control">
+                                            </div>
+                                            <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                                <label for="summon_next">{{ __("t.summon_next") }}</label>
+                                                <input type="date" name="summon_next" class="form-control">
+                                            </div>
+                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                                    <label for="decision">{{ __("t.decision") }}</label>
+                                                    <input type="text" name="decision" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                                    <label for="dec_date">{{ __("t.dec_date") }}</label>
+                                                    <input type="date" name="dec_date" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                                    <label for="rel_date">{{ __("t.rel_date") }}</label>
+                                                    <input type="date" name="rel_date" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                                    <label for="warranty">{{ __("t.warranty") }}</label>
+                                                    <input type="text" name="warranty" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                                    <label for="date_payment">{{ __("t.date_payment") }}</label>
+                                                    <input type="date" name="date_payment" class="form-control">
+                                                </div>
+                                            {{-- end --}}
 
+                                            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                                <label for="level_notes">{{ __("t.level_notes") }}</label>
+                                                <textarea name="level_notes" class="form-control" cols="30" rows="10"></textarea>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <input type="submit" class="btn btn-primary" value="{{ __("t.update") }}">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    
+                    <div class="current_level">
+                        <div class="container">
+                            <table class="table">
+                                @if ($case->case_level == 'police' && $case->case_level == 'prosecution')
+                                <tr>
+                                    <td>{{ __("t.judcial_dept") }}</td>
+                                    <td>{{ $current_level->judcial_dept }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.floor") }}</td>
+                                    <td>{{ $current_level->floor }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.room") }}</td>
+                                    <td>{{ $current_level->room }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.court_secretary") }}</td>
+                                    <td>{{ $current_level->court_secretary }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.last_hearing") }}</td>
+                                    <td>{{ $current_level->last_hearing }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.next_hearing") }}</td>
+                                    <td>{{ $current_level->next_hearing }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.last_requirements") }}</td>
+                                    <td>{{ $current_level->last_requirements }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.current_requirements") }}</td>
+                                    <td>{{ $current_level->current_requirements }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.hearing_statement") }}</td>
+                                    <td>{{ $current_level->hearing_statement }}</td>
+                                </tr>
+                                @endif
+                                @if ($case->case_level == 'police')
+                                    <tr>
+                                        <td>{{ __("t.police_station") }}</td>
+                                        <td>{{ $current_level->ps_station }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ __("t.officer") }}</td>
+                                        <td>{{ $current_level->officer }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ __("t.decision") }}</td>
+                                        <td>{{ $current_level->decision }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ __("t.dec_date") }}</td>
+                                        <td>{{ $current_level->dec_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ __("t.rel_date") }}</td>
+                                        <td>{{ $current_level->rel_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ __("t.warranty") }}</td>
+                                        <td>{{ $current_level->warranty }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ __("t.date_payment") }}</td>
+                                        <td>{{ $current_level->date_payment }}</td>
+                                    </tr>
+                                @endif
+                                @if ($case->case_level == 'prosecution')
+                                <tr>
+                                    <td>{{ __("t.pros_type") }}</td>
+                                    <td>{{ $current_level->pros_type }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.pros_name") }}</td>
+                                    <td>{{ $current_level->pros_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.pros_next_summon_date") }}</td>
+                                    <td>{{ $current_level->pros_next_summon_date }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.pros_summon") }}</td>
+                                    <td>{{ $current_level->pros_summon }}</td>
+                                </tr>
+                                {{-- <tr>
+                                    <td>{{ __("t.officer") }}</td>
+                                    <td>{{ $current_level->officer }}</td>
+                                </tr> --}}
+                                <tr>
+                                    <td>{{ __("t.decision") }}</td>
+                                    <td>{{ $current_level->decision }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.dec_date") }}</td>
+                                    <td>{{ $current_level->dec_date }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.rel_date") }}</td>
+                                    <td>{{ $current_level->rel_date }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.warranty") }}</td>
+                                    <td>{{ $current_level->warranty }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.date_payment") }}</td>
+                                    <td>{{ $current_level->date_payment }}</td>
+                                </tr>
+                                @endif
+                                @if ($case->case_level != 'first-degree')
+
+                                @endif
+                                @if ($case->case_level != 'resumption')
+
+                                @endif
+                                @if ($case->case_level != 'excellence')
+
+                                @endif
+                                @if ($case->case_level == 'expert')
+                                <tr>
+                                    <td>{{ __("t.date_of_expert")}}</td>
+                                    <td>{{ $current_level->date_of_expert }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ __("t.expert_name")}}</td>
+                                    <td>{{ $current_level->expert_name }}</td>
+                                </tr>
+                                    <tr>
+                                        <td>{{ __("t.section")}}</td>
+                                        <td>{{ $current_level->section }}</td>
+                                    </tr>
+                                @endif
+                                @if ($case->case_level != 'shapes')
+
+                                @endif
+                            </table>
+                            <div class="col-md-2">
+                                <a class="btn btn-success" href="/admin/case/hearing/history/{{ $case->case_id }}" rel="noopener">{{ __("t.hearing_history") }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
 
         <div class="col-md-12 col-sm-12 col-xs-12">

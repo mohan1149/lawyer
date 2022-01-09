@@ -16,7 +16,7 @@ var FormControlsClient = {
                 party_advocate: "required",
                 case_no: "required",
                 case_type: "required",
-                case_status: "required",
+                //case_status: "required",
                 act: "required",
                 court_type: "required",
                 next_date: "required",
@@ -25,8 +25,8 @@ var FormControlsClient = {
                 judge_type: "required",
                 filing_number: "required",
                 filing_date: "required",
-                registration_number: "required",
-                registration_date: "required",
+                //registration_number: "required",
+                //registration_date: "required",
 
             },
             messages: {
@@ -65,7 +65,74 @@ var FormControlsClient = {
 jQuery(document).ready(function () {
     FormControlsClient.init();
 
-
+    $("#level_controller").on('change', (event) => {
+        let level = $("#level_controller").val();
+        switch (level) {
+            case 'police':
+                $('.police.hidden_field').css('display','block');
+                $('.pros.hidden_field').css('display','none');
+                $('.fd.hidden_field').css('display','none');
+                $('.res.hidden_field').css('display','none');
+                $('.excel.hidden_field').css('display','none');
+                $('.exp.hidden_field').css('display','none');
+                $('.shapes.hidden_field').css('display','none');
+                break;
+            case 'prosecution':
+                $('.police.hidden_field').css('display','none');
+                $('.pros.hidden_field').css('display','block');
+                $('.fd.hidden_field').css('display','none');
+                $('.res.hidden_field').css('display','none');
+                $('.excel.hidden_field').css('display','none');
+                $('.exp.hidden_field').css('display','none');
+                $('.shapes.hidden_field').css('display','none');
+                break;
+            case 'first_degree':
+                $('.police.hidden_field').css('display','none');
+                $('.pros.hidden_field').css('display','none');
+                $('.fd.hidden_field').css('display','block');
+                $('.res.hidden_field').css('display','none');
+                $('.excel.hidden_field').css('display','none');
+                $('.exp.hidden_field').css('display','none');
+                $('.shapes.hidden_field').css('display','none');
+                break;
+            case 'resumption':
+                $('.police.hidden_field').css('display','none');
+                $('.pros.hidden_field').css('display','none');
+                $('.fd.hidden_field').css('display','none');
+                $('.res.hidden_field').css('display','block');
+                $('.excel.hidden_field').css('display','none');
+                $('.exp.hidden_field').css('display','none');
+                $('.shapes.hidden_field').css('display','none');
+                break;
+            case 'excellece':
+                $('.police.hidden_field').css('display','none');
+                $('.pros.hidden_field').css('display','none');
+                $('.fd.hidden_field').css('display','none');
+                $('.res.hidden_field').css('display','none');
+                $('.excel.hidden_field').css('display','block');
+                $('.exp.hidden_field').css('display','none');
+                $('.shapes.hidden_field').css('display','none');
+                break;
+            case 'expert':
+                $('.police.hidden_field').css('display','none');
+                $('.pros.hidden_field').css('display','none');
+                $('.fd.hidden_field').css('display','none');
+                $('.res.hidden_field').css('display','none');
+                $('.excel.hidden_field').css('display','none');
+                $('.exp.hidden_field').css('display','block');
+                $('.shapes.hidden_field').css('display','none');
+                break;
+            case 'shapes':
+                $('.police.hidden_field').css('display','none');
+                $('.pros.hidden_field').css('display','none');
+                $('.fd.hidden_field').css('display','none');
+                $('.res.hidden_field').css('display','none');
+                $('.excel.hidden_field').css('display','none');
+                $('.exp.hidden_field').css('display','none');
+                $('.shapes.hidden_field').css('display','block');
+                break;
+        }
+    });
     $('.datetimepickerfilingdate').datepicker({
         format: date_format_datepiker,
         autoclose: "close",
@@ -214,7 +281,7 @@ function getCaseSubType(id) {
         $.ajax({
             url: getCaseSubTypes,
             method: "POST",
-            data: {id: id},
+            data: { id: id },
             success: function (result) {
                 if (result.errors) {
                     $('.alert-danger').html('');
@@ -245,7 +312,7 @@ function getCourt(id) {
         $.ajax({
             url: getCourts,
             method: "POST",
-            data: {id: id},
+            data: { id: id },
             success: function (result) {
                 if (result.errors) {
                     $('.alert-danger').html('');
