@@ -638,66 +638,24 @@ class CaseRunningController extends Controller
         $case->case_level = $request['case_level'];
         $case->save();
         $input[] = ['case_id'=>$case->id];
-        // DB::table('case_step_levels')->insert([
-        //     'case_id'=>$case->id,
-        //     'case_level'=>$request['case_level'],
-        //     'detective'=>$request['detective'],
-        //     'police_decision'=>$request['police_decision'],
-        //     'police_decision_date'=>$request['police_decision_date'],
-        //     'police_release_date'=>$request['police_release_date'],
-        //     'police_warranty_value'=>$request['police_warranty_value'],
-        //     'police_date_payment'=>$request['police_date_payment'],
-        //     'pros_type'=>$request['pros_type'],
-        //     'pros_name'=>$request['pros_name'],
-        //     'pros_sec_name'=>$request['pros_summon_date'],
-        //     'pros_summon_date'=>$request['pros_summon_date'],
-        //     'pros_next_summon_date'=>$request['pros_next_summon_date'],
-        //     'pros_decision'=>$request['pros_decision'],
-        //     'pros_decision_date'=>$request['pros_decision_date'],
-        //     'pros_release_date'=>$request['pros_release_date'],
-        //     'pros_warranty'=>$request['pros_warranty'],
-        //     'pros_date_pay'=>$request['pros_date_pay'],
-        //     'fd_jud_dept'=>$request['fd_jud_dept'],
-        //     'fd_floor'=>$request['fd_floor'],
-        //     'fd_room'=>$request['fd_room'],
-        //     'fd_sec'=>$request['fd_sec'],
-        //     'fd_last_hear'=>$request['fd_last_hear'],
-        //     'fd_next_hear'=>$request['fd_next_hear'],
-        //     'fd_last_req'=>$request['fd_last_req'],
-        //     'fd_now_req'=>$request['fd_now_req'],
-        //     'fd_statement'=>$request['fd_statement'],
-        //     'fd_judge_date'=>$request['fd_judge_date'],
-        //     'res_court_type'=>$request['res_court_type'],
-        //     'res_floor'=>$request['res_floor'],
-        //     'res_room'=>$request['res_room'],
-        //     'res_date'=>$request['res_date'],
-        //     'res_jud_dept'=>$request['res_jud_dept'],
-        //     'res_court_sec'=>$request['res_court_sec'],
-        //     'res_hear_req'=>$request['res_hear_req'],
-        //     'res_judge_date'=>$request['res_judge_date'],
-        //     'excel_court_type'=>$request['excel_court_type'],
-        //     'excel_floor'=>$request['excel_floor'],
-        //     'excel_room'=>$request['excel_room'],
-        //     'excel_date'=>$request['excel_date'],
-        //     'excel_jud_dept'=>$request['excel_jud_dept'],
-        //     'excel_court_sec'=>$request['excel_court_sec'],
-        //     'excel_hear_req'=>$request['excel_hear_req'],
-        //     'exp_court_type'=>$request['exp_court_type'],
-        //     'exp_floor'=>$request['exp_floor'],
-        //     'exp_room'=>$request['exp_room'],
-        //     'exp_date'=>$request['exp_date'],
-        //     'exp_jud_dept'=>$request['exp_jud_dept'],
-        //     'exp_name'=>$request['exp_name'],
-        //     'exp_section'=>$request['exp_section'],
-        //     'exp_hear_req'=>$request['exp_hear_req'],
-        //     'shapes_date'=>$request['shapes_date'],
-        //     'shapes_floor'=>$request['shapes_floor'],
-        //     'shapes_room'=>$request['shapes_room'],
-        //     'shapes_num'=>$request['shapes_num'],
-        //     'shapes_sec'=>$request['shapes_sec'],
-        //     'shapes_jud_dept'=>$request['shapes_jud_dept'],
-        //     'shapes_hear_req'=>$request['shapes_hear_req'],
-        // ]);
+        DB::table('case_levels')->insert([
+            'case_id'=>$case->id,
+            'case_level'=>$request['case_level'],
+            'case_num'=>$request['case_no'],
+            'level_notes'=>$request['description'],
+            'ps_station'=>$request['ps_station'],
+            'officer'=> $request['case_level'] == 'police' ? $request['po_officer'] : $request['pro_officer'],
+            'reg_date'=> $request['reg_date'],
+            'decision'=>$request['case_level'] == 'police' ? $request['po_officer'] : $request['pro_officer'],
+            'dec_date'=>$request['case_level'] == 'police' ? $request['po_decision'] : $request['pro_decision'],
+            'rel_date'=>$request['case_level'] == 'police' ? $request['po_rel_date'] : $request['pro_rel_date'],
+            'warranty'=>$request['case_level'] == 'police' ? $request['po_warranty'] : $request['pro_warranty'],
+            'date_payment'=>$request['case_level'] == 'police' ? $request['po_date_payment'] : $request['pro_date_payment'],
+            'pros_type'=>$request['pros_type'],
+            'pros_name'=>$request['pro_officer'],
+            'pros_summon'=>$request['summon'],
+            'pros_next_summon_date'=>$request['summon_next'],
+        ]);
 
         if (isset($request->assigned_to) && count($request->assigned_to)) {
             foreach ($request->assigned_to as $key => $value) {
@@ -813,6 +771,7 @@ class CaseRunningController extends Controller
             ->where('level.case_level',$case->case_level)
             ->orderBy('level.lid','DES')
             ->first();
+        $data['days'] = DB::table('tudgement_time_lows')->where('case_level',$case->case_level)->get();
         return view('admin.case.view.view_case_details', $data);
     }
 
@@ -1685,4 +1644,30 @@ class CaseRunningController extends Controller
         }        
     }
 
+    public function addJudgement(Request $request){
+        try {
+            DB::table('case_judgements')->insert([
+                'case_id'=>$request['case_id'],
+                'case_level'=>$request['case_level'],
+                'days'=>$request['days'],
+                'j_date'=>$request['j_date'],
+                'notes'=>$request['notes'],
+            ]);
+            return redirect('admin/case-running/'.$request['case_id']);
+        } catch (\Exception $e) {
+            return abort(500,'ISE');
+        }
+    }
+
+    public function judgementHistory(Request $request){
+        try {
+            $history = DB::table('case_judgements')
+                ->where('case_id',$request['id'])
+                ->orderBy('cjid','DSC')
+                ->get();
+            return view('admin.case.view.jhistory',['history'=>$history]);
+        } catch (\Exception $e) {
+            return abort(500,'ISE');
+        }
+    }
 }

@@ -84,7 +84,7 @@
             || $adminHasPermition->can(['general_setting_edit'])=="1")
                 <li><a><i class="fa fa-gear"></i> {{__("t.settings")}} <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-
+                        <li><a href="{{ url('admin/judge-time-low') }}">{{__("t.judgement_time_lows")}}</a></li>
                         @if($adminHasPermition->can(['case_type_list']) == "1")
                             <li><a href="{{ url('admin/case-type') }}">{{__("t.case_type")}}</a></li>
                         @endif

@@ -12,11 +12,9 @@ class CaseRollController extends Controller
     public function getCaseRoll(Request $request){
         try {
             $case_types = DB::table('case_types')->get()->pluck('case_type_name','id');
-            $case_status = DB::table('case_statuses')->get()->pluck('case_status_name','id');
             $courts = DB::table('courts')->get()->pluck('court_name','id');
             $filter_data= [
                 'types'=>$case_types,
-                'status'=>$case_status,
                 'courts'=>$courts,
             ];
             $cases = $this->filterRoll($request);
@@ -33,7 +31,7 @@ class CaseRollController extends Controller
         try {
             $case_number = $request['case_number'];
             $case_type = $request['case_type'];
-            $case_status = $request['case_status'];
+            $case_level = $request['case_level'];
             $start_date = $request['start_date'];
             $end_date = $request['end_date'];
             $priority = $request['priority'];
@@ -41,7 +39,6 @@ class CaseRollController extends Controller
             $exe_status = $request['exe_status'];
             $query = DB::table('court_cases as case')
             ->join('advocate_clients as client','client.id','=','case.advo_client_id')
-            ->join('case_statuses as status','status.id','=','case.case_status')
             ->select([
                 'case.case_number',
                 'case.priority',
@@ -53,9 +50,9 @@ class CaseRollController extends Controller
                 'case.case_status',
                 'case.judge_type',
                 'case.case_sub_type',
-                'status.case_status_name',
                 'case.exe_status',
                 'case.notice_status',
+                'case.case_level'
             ]);
             $query->when($case_number!='',function($q){
                 return $q->where('case.case_number',request('case_number'));
@@ -63,8 +60,8 @@ class CaseRollController extends Controller
             $query->when($case_type!= 0,function($q){
                 return $q->where('case.case_sub_type',request('case_type'));
             });
-            $query->when($case_status!= 0,function($q){
-                return $q->where('case.case_status',request('case_status'));
+            $query->when($case_level!= '',function($q){
+                return $q->where('case.case_level',request('case_level'));
             });
             $query->when($priority!= 0,function($q){
                 return $q->where('case.priority',request('priority'));

@@ -38,11 +38,15 @@
                                             <label for="case_status">
                                                 {{__("t.case_status")}}
                                             </label>
-                                            <select name="case_status" class="form-control">
-                                                <option value="0">----</option>
-                                                @foreach ($filter_data['status'] as $key => $status)
-                                                    <option {{ request('case_status') == $key ? 'selected':'' }} value="{{ $key }}">{{ $status }}</option>
-                                                @endforeach
+                                            <select name="case_level" class="form-control" required>
+                                                    <option {{ request('case_level') == 'police' ? 'selected':'' }} value="police">{{ __('t.police') }}</option>
+                                                    <option {{ request('case_level') == 'prosecution' ? 'selected':'' }} value="prosecution">{{ __('t.prosecution') }}</option>
+                                                    <option {{ request('case_level') == 'first-degree' ? 'selected':'' }} value="first-degree">{{ __('t.first-degree') }}</option>
+                                                    <option {{ request('case_level') == 'resumption' ? 'selected':'' }} value="resumption">{{ __('t.resumption') }}</option>
+                                                    <option {{ request('case_level') == 'excellence' ? 'selected':'' }} value="excellence">{{ __('t.excellence') }}</option>
+                                                    <option {{ request('case_level') == 'expert' ? 'selected':'' }} value="expert">{{ __('t.expert') }}</option>
+                                                    <option {{ request('case_level') == 'shapes' ? 'selected':'' }} value="shapes">{{ __('t.shapes') }}</option>
+                                                </select>
                                             </select>
                                         </div>
                                     </div>
@@ -103,7 +107,6 @@
                                     <div class="col-md-12">
                                         <a href="{{ url()->full()."&pdf=true" }}" class="btn btn-danger">{{ __("t.pdf") }}</a>
                                         <input class="btn btn-primary" type="submit" value="{{ __("t.filter") }}">
-                                        {{-- <input class="btn btn-info" type="reset" value="{{ __("t.reset") }}"> --}}
                                     </div>
                                 </div>
                             </form>
@@ -118,9 +121,9 @@
                                     <th>{{__("t.client_name")}}</th>
                                     <th>{{__("t.next_hearing")}}</th>
                                     <th>{{__("t.client_position")}}</th>
-                                    <th>{{__("t.case_status")}}</th>
                                     <th>{{__("t.exe_status")}}</th>
                                     <th>{{__("t.notice_status")}}</th>
+                                    <th>{{__("t.case_level")}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -131,9 +134,9 @@
                                         <td>{{ $case->first_name.' '.$case->last_name }}</td>
                                         <td>{{ $case->next_date }}</td>
                                         <td>{{ $case->client_position }}</td>
-                                        <td>{{ $case->case_status_name }}</td>
                                         <td>{{ $case->exe_status == 0 ? __('t.not_done') : __('t.done') }}</td>
                                         <td>{{ $case->notice_status == 0 ? __('t.not_sent') : __('t.sent') }}</td>
+                                        <td class="text red">{{ __("t.".$case->case_level) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

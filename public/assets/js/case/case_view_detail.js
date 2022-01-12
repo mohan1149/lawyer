@@ -93,5 +93,11 @@ jQuery(document).ready(function () {
                 break;
         }
     });
+    $("#j_days").on('change', () => {
+        var date = new Date();
+        var numberOfDaysToAdd = parseInt($("#j_days").val());
+        var result = date.setDate(date.getDate() + numberOfDaysToAdd);
+        $("#j_date").val(new Date(result).toDateString());
+    });
 });
 

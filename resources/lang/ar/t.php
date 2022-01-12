@@ -434,4 +434,24 @@ return [
     'exe_date'=>'تاريخ التنفيذ',
     'exe_notes'=>'ملاحظات التنفيذ',
     'view_execution'=>'عرض التنفيذ',
-];   
+    
+    'police'=>"شرطة",
+    'prosecution'=>'الملاحقة القضائية',
+    'first-degree'=>'الدرجة الأولى',
+    'resumption'=>'استئناف',
+    'excellence'=>"تفوق",
+    'expert'=>"خبير",
+    'shapes'=>'الأشكال',
+    
+    'level_history'=>'تاريخ المستوى',
+    'add_judgement'=>'أضف حكم',
+    'days'=>"أيام",
+    'judgement_date'=>'تاريخ الحكم',
+    'room'=>'الأشكال',
+    'floor'=>'الأرض',
+    'next_hearing'=>'الجلسة القادمة',
+    'judgement_history'=>"تاريخ الحكم",
+    'j_date'=>'تاريخ الحكم',
+    'summon'=>'تاريخ الاستدعاء',
+    'summon_next'=>'تاريخ الاستدعاء التالي',
+];  

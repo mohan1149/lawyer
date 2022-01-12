@@ -117,7 +117,6 @@ class SliderController extends Controller
     {
         //
         try {
-
             $slider->delete();
             return response()->json(['success'=>true], 200);
         } catch (\Exception $e) {

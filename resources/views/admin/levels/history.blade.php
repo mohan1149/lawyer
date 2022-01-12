@@ -288,7 +288,7 @@
                     </div>
                 </div>
             </div>
-            <h2 class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="display:flex;justify-content: center"></h2>
+            <i class="glyphicon glyphicon-arrow-up" aria-hidden="true" style="display:flex;justify-content: center;padding: 5px;font-size:20px;"></i>
         @endforeach
     </div>
 @endsection

@@ -132,9 +132,10 @@
                     <div class="x_content">
 
                         <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="case_level">{{ __("t.case_level") }}</label>
-                                <select name="case_level" class="form-control">
+                            <div class="col-md-12 col-sm-12 col-xs-12 form-group highlight_input">
+                                <label for="case_level">{{ __("t.case_level") }}**</label>
+                                <select name="case_level" class="form-control" id="level_controller" required>
+                                    <option value="NULL">------ </option>
                                     <option value="police">{{ __('t.police') }}</option>
                                     <option value="prosecution">{{ __('t.prosecution') }}</option>
                                     <option value="first-degree">{{ __('t.first-degree') }}</option>
@@ -150,7 +151,7 @@
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 form-group">
                                 <label for="fullname">{{__("t.filling_number")}} <span class="text-danger">*</span></label>
-                                <input type="text" id="filing_number" name="filing_number" class="form-control" value="{{ time() }}">
+                                <input type="text" id="filing_number" name="filing_number" class="form-control">
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 form-group">
                                 <label for="case_no">{{__('t.case_no')}}<span class="text-danger">*</span></label>
@@ -171,6 +172,75 @@
                             <div class="col-md-4 col-sm-12 col-xs-12 form-group">
                                 <label for="fullname">{{__("t.case_sub_type")}} <span class="text-danger"></span></label>
                                 <select class="form-control" id="case_sub_type" name="case_sub_type"></select>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                <label for="police_station">{{ __("t.police_station") }}</label>
+                                <input type="text" name="ps_station" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                <label for="officer">{{ __("t.officer") }}</label>
+                                <input type="text" name="po_officer" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                <label for="reg_date">{{ __("t.reg_date") }}</label>
+                                <input type="date" name="reg_date" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                <label for="decision">{{ __("t.decision") }}</label>
+                                <input type="text" name="po_decision" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                <label for="dec_date">{{ __("t.dec_date") }}</label>
+                                <input type="date" name="po_dec_date" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                <label for="rel_date">{{ __("t.rel_date") }}</label>
+                                <input type="date" name="po_rel_date" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                <label for="warranty">{{ __("t.warranty") }}</label>
+                                <input type="text" name="po_warranty" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 form-group police hidden_field">
+                                <label for="date_payment">{{ __("t.date_payment") }}</label>
+                                <input type="date" name="po_date_payment" class="form-control">
+                            </div>
+                        {{-- end --}}
+                        <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                            <label for="pros_type">{{ __("t.pros_type") }}</label>
+                            <input type="text" name="pros_type" class="form-control">
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                            <label for="officer">{{ __("t.officer") }}</label>
+                            <input type="text" name="pro_officer" class="form-control">
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                            <label for="summon">{{ __("t.summon") }}</label>
+                            <input type="date" name="summon" class="form-control">
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                            <label for="summon_next">{{ __("t.summon_next") }}</label>
+                            <input type="date" name="summon_next" class="form-control">
+                        </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                <label for="decision">{{ __("t.decision") }}</label>
+                                <input type="text" name="pro_decision" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                <label for="dec_date">{{ __("t.dec_date") }}</label>
+                                <input type="date" name="pro_dec_date" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                <label for="rel_date">{{ __("t.rel_date") }}</label>
+                                <input type="date" name="pro_rel_date" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                <label for="warranty">{{ __("t.warranty") }}</label>
+                                <input type="text" name="pro_warranty" class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 form-group pros hidden_field">
+                                <label for="date_payment">{{ __("t.date_payment") }}</label>
+                                <input type="date" name="pro_date_payment" class="form-control">
                             </div>
 
                         </div>
@@ -197,7 +267,7 @@
                         <div class="row">
                             <div class="col-md-4 col-sm-12 col-xs-12 form-group">
                                 <label for="fullname">{{__("t.act")}} <span class="text-danger">*</span></label>
-                                <input type="text" id="act" name="act" class="form-control">
+                                <input type="text" id="law_num" name="act" class="form-control">
                             </div>
                             
                             <div class="col-md-4 col-sm-12 col-xs-12 form-group">

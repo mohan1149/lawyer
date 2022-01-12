@@ -102,6 +102,7 @@ class CaseLevelController extends Controller
             $case_id = $request['id'];
             $levels = DB::table('case_levels')
                 ->where('case_id',$case_id)
+                ->orderBy('lid','DES')
                 ->get();
             return view('admin.levels.history',['levels'=>$levels]);
         } catch (\Exception $e) {

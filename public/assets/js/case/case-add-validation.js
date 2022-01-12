@@ -17,7 +17,7 @@ var FormControlsClient = {
                 case_no: "required",
                 case_type: "required",
                 //case_status: "required",
-                act: "required",
+                //act: "required",
                 court_type: "required",
                 next_date: "required",
                 court_no: "required",

@@ -58,9 +58,9 @@ return [
     'select_case_status'=>'Select case Status',
     'case_sub_type'=>"Case Sub Type",
     'case_stage'=>"Case Stage",
-    'act'=>"Act",
+    'act'=>"Act No / Law No",
     'filling_number'=>"Case Number Auto",
-    'filling_date'=>"Filling Date",
+    'filling_date'=>"Case Filling Date",
     'registration_no'=>"Registration No",
     'registration_date'=>"Registration Date",
     'first_hearing'=>"First Hearing",
@@ -83,7 +83,6 @@ return [
     'select_users'=>"Select Users",
     'cancel'=>"Cancel",
     'save'=>"Save",
-   
     //Invoice Section
     'add_invoice'=> "Add Invoice",
     'no'=>"No.",
@@ -136,7 +135,6 @@ return [
      'clear'=> "Clear",
      'search'=>"search",
      'time'=> "Time",
-
      'new_client'=> "New Client",
      'existing_client' => "Existing Client",
      'new_client_name'=> "New Client Name",
@@ -166,9 +164,7 @@ return [
      'advocate_name'=> "Advocate Name",
      'male'=>"Male",
      'female'=>"Female",
-
      //role
-
      'add_role' => "Add Role",
      'role_name'=> "Role Name",
      'role_description'=> "Role Description",
@@ -276,7 +272,6 @@ return [
      'login_your_account'=> "Login your Account",
      'log_in'=> "Log In",
      'lost_your_password' => "Lost Your Password",
-
      'new_to_site'=> "New to Site",
      'create_account'=> "Create Account",
      'submit'=> "Submit",
@@ -294,7 +289,6 @@ return [
      'edit_member'=> "Edit Member",
      'remove_feature_image'=> "Remove Feature Image",
      'set_profile_image'=> "Set Profile Image",
-
      'edit_case_status'=> "Edit Case Status",
      'add_case_status'=> "Add Case Status",
      'add_court'=> "Add Court",
@@ -309,7 +303,6 @@ return [
      'edit_expense'=> "Edit Expense",
      'add_expense_type'=> "Add Expense Type",
      'edit_expense_type'=> "Edit Expense Type",
-
      'receipt_date'=> "Receipt Date",
      'receving_date' => "Receving Date",
      'paymennt_made_history' => "paymennt_made_history",
@@ -332,9 +325,7 @@ return [
      'date' => "Date",
      'name'=> "Name",
      'add_invoice' => "Add Invoice",
-
      //Translations - 20211204 
-
      'consultations' => "Consultations", 
      'sliders' => "Sliders", 
     'documents' => "Documents",
@@ -384,7 +375,6 @@ return [
     'court_number_and_judge'=>'Court Number And Judge',
     'user_documents' => 'User Documents',
     'open'=> 'Open',
-
     'notices'=>"Notices",
     'against'=>"Against",
     'mark_sent'=>'Mark as Sent',
@@ -439,7 +429,6 @@ return [
     'excellence'=>"Excellence",
     'expert'=>"Expert",
     'shapes'=>'Shapes',
-
     'case_level'=>'Case Level',
     'add_hearing'=>'Add Hearing',
     'update_level'=>'Update Level',
@@ -450,7 +439,6 @@ return [
     'last_hearing'=>'Last Hearing',
     'hearing_history'=>'Hearing History',
     'level_notes'=>'Level Notes',
-
     'pros_type'=>"Proscution Type",
     'pros_name'=>'Proscuter Name',
     'pros_next_summon_date'=>"Next Summon Date",
@@ -463,7 +451,15 @@ return [
     'date_payment'=>"Date Payment",
     'court_secretary'=>"Secratery",
 
+    'add_judgement'=>'Add Judgement',
+    'days'=>"Days",
+    'judgement_date'=>'Judgement Date',
+    'j_date'=>'Judgement Date',
+    'judgement_history'=>"Judgement History",
 
+    'summon'=>'Summon Date',
+    'summon_next'=>'Next Summon Date',
+    ''
 
     
 

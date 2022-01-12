@@ -226,6 +226,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
     Route::get('case/roll','CaseRollController@getCaseRoll');
     Route::get('case/roll/pdf','CaseRollController@pdfRoll');
     Route::post('case/add/hearing','CaseRunningController@addHearing');
+    Route::resource('judge-time-low', 'JudgeTimeLowController');
+    Route::post('add/judgement', 'CaseRunningController@addJudgement');
+    Route::get('history/judgement/{id}', 'CaseRunningController@judgementHistory');
+    
     
     
 });

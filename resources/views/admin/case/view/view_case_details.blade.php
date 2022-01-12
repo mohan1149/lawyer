@@ -104,7 +104,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_content">
-                    <h3>{{ __("t.case_level") }} - <strong style="text-transform: uppercase">{{ $case->case_level.' ' }}</strong><a class="btn btn-success" href="/admin/case/level/history/{{ $case->case_id }}" rel="noopener">{{ __("t.level_history") }}</a></h3>
+                    <h3>{{ __("t.case_level") }} - <strong style="text-transform: uppercase">{{ __("t.".$case->case_level).' ' }}</strong><a class="btn btn-success" href="/admin/case/level/history/{{ $case->case_id }}" rel="noopener">{{ __("t.level_history") }}</a></h3>
                     <div class="clearfix"></div>
                     <div class="accordion" id="case_view_accordian">
                         <div class="panel panel-info">
@@ -206,7 +206,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="panel panel-info">
+                        <div class="panel panel-info">
                             <div class="panel-heading">
                                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
                                     {{ __("t.add_judgement") }}
@@ -214,10 +214,44 @@
                             </div>
                             <div class="panel-body">
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#case_view_accordian">
-                                    new form
+                                    <form action="/admin/add/judgement" method="POST">
+                                        @csrf
+                                        <div class="row">
+                                            <input type="hidden" name="case_id" value="{{ $case->case_id }}">
+                                            <input type="hidden" name="case_level" value="{{ $case->case_level }}">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="j_days">{{ __("t.days") }}</label>
+                                                    <select id="j_days" name="days" class="form-control">
+                                                        <option value="0">----</option>
+                                                        @foreach ($days as $day)
+                                                            <option value="{{ $day->number_days }}">{{ $day->number_days }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="j_date">{{ __("t.judgement_date") }}</label>
+                                                    <input type="text" name="j_date" id="j_date" class="form-control" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="notes">{{ __("t.notes") }}</label>
+                                                    <textarea name="notes" class="form-control" id="notes" cols="30" rows="10"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="submit" value="{{ __("t.add") }}" class="btn btn-primary">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="panel panel-info">
                             <div class="panel-heading">
                                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
@@ -351,7 +385,7 @@
                     <div class="current_level">
                         <div class="container">
                             <table class="table">
-                                @if ($case->case_level == 'police' && $case->case_level == 'prosecution')
+                                @if ($case->case_level != 'police' && $case->case_level != 'prosecution')
                                 <tr>
                                     <td>{{ __("t.judcial_dept") }}</td>
                                     <td>{{ $current_level->judcial_dept }}</td>
@@ -491,6 +525,10 @@
                             <div class="col-md-2">
                                 <a class="btn btn-success" href="/admin/case/hearing/history/{{ $case->case_id }}" rel="noopener">{{ __("t.hearing_history") }}</a>
                             </div>
+                            <div class="col-md-2">
+                                <a class="btn btn-success" href="/admin/history/judgement/{{ $case->case_id }}" rel="noopener">{{ __("t.judgement_history") }}</a>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
