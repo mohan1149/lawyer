@@ -450,16 +450,21 @@ return [
     'warranty'=>'Warranty Value',
     'date_payment'=>"Date Payment",
     'court_secretary'=>"Secratery",
-
     'add_judgement'=>'Add Judgement',
     'days'=>"Days",
     'judgement_date'=>'Judgement Date',
     'j_date'=>'Judgement Date',
     'judgement_history'=>"Judgement History",
-
     'summon'=>'Summon Date',
     'summon_next'=>'Next Summon Date',
-    ''
+
+    'judgement_time_lows'=>'Judgement Time Lows',
+    'time_lows'=>"Time Lows",
+    'number_days'=>"Number of Days",
+    'add_time_low'=>"Add Time Low",
+    'add_judgment_time_low'=>"Add Judgment Time Low",
+    'sure_to_delete'=>"Are you sure to delete?",
+    'delete_record'=>"Once record is deleted, it will not be retrieved",
 
     
 
