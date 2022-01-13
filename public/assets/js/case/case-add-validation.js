@@ -86,7 +86,7 @@ jQuery(document).ready(function () {
                 $('.exp.hidden_field').css('display','none');
                 $('.shapes.hidden_field').css('display','none');
                 break;
-            case 'first_degree':
+            case 'first-degree':
                 $('.police.hidden_field').css('display','none');
                 $('.pros.hidden_field').css('display','none');
                 $('.fd.hidden_field').css('display','block');

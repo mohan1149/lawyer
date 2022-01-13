@@ -465,6 +465,7 @@ return [
     'add_judgment_time_low'=>"Add Judgment Time Low",
     'sure_to_delete'=>"Are you sure to delete?",
     'delete_record'=>"Once record is deleted, it will not be retrieved",
+    'reg_date'=>"Registration Date",
 
     
 

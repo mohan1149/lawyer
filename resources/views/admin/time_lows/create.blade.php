@@ -15,7 +15,7 @@
                                 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="days">{{ __("t.days")}}</label>
+                                        <label for="days">{{ __("t.case_level")}}</label>
                                         <select name="case_level" class="form-control">
                                             <option value="police">{{ __('t.police') }}</option>
                                             <option value="prosecution">{{ __('t.prosecution') }}</option>
