@@ -436,14 +436,14 @@ return [
     'view_execution'=>'عرض التنفيذ',
     
     'police'=>"شرطة",
-    'prosecution'=>'الملاحقة القضائية',
+    'prosecution'=>'النيابة ',
     'first-degree'=>'الدرجة الأولى',
     'resumption'=>'استئناف',
-    'excellence'=>"تفوق",
-    'expert'=>"خبير",
+    'excellence'=>"التمييز",
+    'expert'=>"الخبراء",
     'shapes'=>'الأشكال',
     
-    'level_history'=>'سجل مستوي درجة التقاضي',
+    'level_history'=>'سجل درجة التقاضي',
     'add_judgement'=>'اضافة حكم',
     'days'=>"أيام",
     'judgement_date'=>'تاريخ الحكم',
