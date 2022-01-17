@@ -29,6 +29,16 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <label for="case_type">{{ __("t.case_type") }}</label>
+                                        <select name="case_type" class="form-control">
+                                            @foreach ($case_types as $key=> $case_type)
+                                                <option value="{{ $key }}">{{ $case_type }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
                                         <label for="days">{{ __("t.days")}}</label>
                                         <input type="number" name="days" class="form-control" required>
                                     </div>

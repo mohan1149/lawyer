@@ -12,7 +12,10 @@ class JudgeTimeLowController extends Controller
 
     public function index(){
         try {
-            $times = DB::table('tudgement_time_lows')->get();
+            $times = DB::table('tudgement_time_lows as laws')
+            ->leftJoin('case_types as types','laws.case_type','=','types.id')
+            ->select(['laws.jtlid','laws.number_days','laws.case_level','types.case_type_name'])
+            ->get();
             return view('admin.time_lows.index',['times'=>$times]);
         } catch (\Exception $e) {
             return abort(500,'ISE');
@@ -21,7 +24,8 @@ class JudgeTimeLowController extends Controller
 
     public function create(){
         try {
-            return view('admin.time_lows.create');
+            $case_types = DB::table('case_types')->get()->pluck('case_type_name','id');
+            return view('admin.time_lows.create',['case_types'=>$case_types]);
         } catch (\Exception $e) {
             return abort(500,'ISE');
         }
@@ -33,7 +37,8 @@ class JudgeTimeLowController extends Controller
             $case_level = $request['case_level'];
             DB::table('tudgement_time_lows')->insert([
                 'number_days'=>$days,
-                'case_level'=>$case_level
+                'case_level'=>$case_level,
+                'case_type'=>$request['case_type'],
             ]);
             return redirect('/admin/judge-time-low');
         } catch (\Exception $e) {

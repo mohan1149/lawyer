@@ -20,6 +20,11 @@
                                 <td>{{ __("t.days") }}</td>
                                 <td>{{ $item->days }}</td>
                             </tr>
+                            
+                            <tr>
+                                <td>{{ __("t.j_from_date") }}</td>
+                                <td>{{ $item->j_from_date }}</td>
+                            </tr>
                             <tr>
                                 <td>{{ __("t.j_date") }}</td>
                                 <td>{{ $item->j_date }}</td>

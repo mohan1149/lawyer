@@ -22,6 +22,7 @@
                                 <tr>
                                     <th>{{__("t.number_days")}}</th>
                                     <th>{{__("t.case_level")}}</th>
+                                    <th>{{__("t.case_type")}}</th>
                                     <th data-orderable="false" class="text-center">{{__("t.action")}}</th>
                                 </tr>
                             </thead>
@@ -30,6 +31,7 @@
                                     <tr>
                                         <td>{{ $time->number_days }}</td>
                                         <td>{{ __("t.".$time->case_level) }}</td>
+                                        <td>{{ $time->case_type_name }}</td>
                                         <td>
                                             <a target="/admin/judge-time-low/{{ $time->jtlid }}" class="red genDeleteBtn" data-toggle="modal" data-target="#gendeleteModal"><i class="fa fa-trash"></i></a>
                                         </td>

@@ -93,11 +93,16 @@ jQuery(document).ready(function () {
                 break;
         }
     });
-    $("#j_days").on('change', () => {
-        var date = new Date();
-        var numberOfDaysToAdd = parseInt($("#j_days").val());
+    let date = null;
+    $('#j_from_date').on('change',()=>{
+        date = new Date($('#j_from_date').val());
+        $("#case_type").val('null');
+    });
+    $("#case_type").on('change', () => {
+        var numberOfDaysToAdd = parseInt($("#case_type").val());
         var result = date.setDate(date.getDate() + numberOfDaysToAdd);
         $("#j_date").val(new Date(result).toDateString());
+        $("#j_days").val(numberOfDaysToAdd);
     });
 });
 

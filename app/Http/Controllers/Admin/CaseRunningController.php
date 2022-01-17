@@ -771,6 +771,11 @@ class CaseRunningController extends Controller
             ->where('level.case_level',$case->case_level)
             ->orderBy('level.lid','DES')
             ->first();
+        $data['case_types'] = DB::table('tudgement_time_lows as laws')
+            ->leftJoin('case_types as types','types.id','=','laws.case_type')
+            ->where('laws.case_level',$case->case_level)
+            ->select(['laws.jtlid','laws.number_days','laws.case_level','types.case_type_name'])
+            ->get();
         $data['days'] = DB::table('tudgement_time_lows')->where('case_level',$case->case_level)->get();
         return view('admin.case.view.view_case_details', $data);
     }
@@ -1652,6 +1657,7 @@ class CaseRunningController extends Controller
                 'days'=>$request['days'],
                 'j_date'=>$request['j_date'],
                 'notes'=>$request['notes'],
+                'j_from_date'=>$request['j_from_date'],
             ]);
             return redirect('admin/case-running/'.$request['case_id']);
         } catch (\Exception $e) {

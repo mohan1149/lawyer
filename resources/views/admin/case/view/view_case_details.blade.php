@@ -221,15 +221,30 @@
                                             <input type="hidden" name="case_level" value="{{ $case->case_level }}">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="j_days">{{ __("t.days") }}</label>
-                                                    <select id="j_days" name="days" class="form-control">
-                                                        <option value="0">----</option>
-                                                        @foreach ($days as $day)
-                                                            <option value="{{ $day->number_days }}">{{ $day->number_days }}</option>
+                                                    <label for="j_from_date">{{ __("t.j_from_date") }}</label>
+                                                    <input type="date" name="j_from_date" id="j_from_date" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="case_type">{{ __("t.case_type") }}</label>
+                                                    <select id="case_type" name="case_type" class="form-control">
+                                                        <option value="null">----</option>
+                                                        @foreach ($case_types as $case_type)
+                                                            <option value="{{ $case_type->number_days }}">{{ $case_type->case_type_name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="j_days">{{ __("t.days") }}</label>
+                                                    <input class="form-control" type="text" name="days" id="j_days" readonly>
+                                                </div>
+                                            </div>
+
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="j_date">{{ __("t.judgement_date") }}</label>
