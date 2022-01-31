@@ -633,4 +633,31 @@ class APIController extends Controller
 		return response()->json($response,200);
 	}
     }
+
+    public function caseHistories($id){
+        try {
+            $response = [];
+            $response['judgements'] = DB::table('case_judgements')
+                ->where('case_id',$id)
+                ->orderBy('cjid','DSC')
+                ->get();
+            $response['hearings'] = DB::table('case_hearings')
+                ->where('case_id',$id)
+                ->orderBy('hid','DSC')
+                ->get();
+            $response['levels'] = DB::table('case_levels')
+                ->where('case_id',$id)
+                ->orderBy('lid','DES')
+                ->get();
+            return response()->json($response,200);
+        } catch (\Exception $e) {
+            $response = [
+                'code'=>500,
+                'message'=>$e->getMessage(),
+                'status'=>'failed',
+            ];
+            return response()->json($response,200);
+        }
+    }
+
 }

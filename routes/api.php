@@ -36,5 +36,6 @@ Route::get('/download/case/{case_id}','APIController@streamCasePDF');
 Route::get('/download/payment-history/{iph_id}','APIController@streamInvoicePaymentHistoryItem');
 Route::post('/upload/user-document','APIController@uploadUserDocument');
 Route::post('/request/payment','APIController@requestPayment');
+Route::get('/case/histories/{id}','APIController@caseHistories');
 
 
