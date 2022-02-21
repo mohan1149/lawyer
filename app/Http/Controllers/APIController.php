@@ -649,6 +649,9 @@ class APIController extends Controller
                 ->where('case_id',$id)
                 ->orderBy('lid','DES')
                 ->get();
+            $response['execution'] = DB::table('case_executions')
+                ->where('case_id',$id)
+                ->first();
             return response()->json($response,200);
         } catch (\Exception $e) {
             $response = [
