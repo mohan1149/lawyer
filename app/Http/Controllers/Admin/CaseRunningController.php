@@ -656,6 +656,9 @@ class CaseRunningController extends Controller
             'pros_summon'=>$request['summon'],
             'pros_next_summon_date'=>$request['summon_next'],
         ]);
+        DB::table('case_executions')->insert([
+            'case_id'=>$case->id,
+        ]);
 
         if (isset($request->assigned_to) && count($request->assigned_to)) {
             foreach ($request->assigned_to as $key => $value) {
