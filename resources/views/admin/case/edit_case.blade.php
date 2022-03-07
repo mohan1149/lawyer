@@ -77,7 +77,6 @@
                                                     <div class="form-group">
                                                         <label class="discount_text position_name"></label>
                                                         <input type="text" id="party_name" name="party_name"
-                                                               data-rule-required="true"
                                                                data-msg-required="Please enter name."
                                                                class="form-control" value="{{$party->party_name}}">
                                                     </div>
@@ -88,7 +87,6 @@
                                                     <div class="form-group">
                                                         <label class="discount_text position_advo"></label>
                                                         <input type="text" id="party_advocate" name="party_advocate"
-                                                               data-rule-required="true"
                                                                data-msg-required="Please enter advocate name."
                                                                class="form-control" value="{{$party->party_advocate}}">
                                                     </div>

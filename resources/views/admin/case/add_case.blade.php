@@ -68,8 +68,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="discount_text "> <b class="position_name">{{__("t.respondent_name")}}</b><span class="text-danger">*</span></label>
-                                                <input type="text" id="party_name" name="party_name"
-                                                       data-rule-required="true" data-msg-required="{{__('t.enter_name')}}"
+                                                <input type="text" id="party_name" name="party_name"data-msg-required="{{__('t.enter_name')}}"
                                                        class="form-control">
                                             </div>
                                         </div>
@@ -80,7 +79,6 @@
                                                 <label class="discount_text "><b class="position_advo">{{__("t.respondent_advocate")}}
                                                         </b><span class="text-danger">*</span></label>
                                                 <input type="text" id="party_advocate" name="party_advocate"
-                                                       data-rule-required="true"
                                                        data-msg-required="{{__('t.enter_advocate_name')}}"
                                                        class="form-control">
                                             </div>

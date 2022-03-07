@@ -12,8 +12,8 @@ var FormControlsClient = {
         $("#add_case").validate({
             rules: {
                 client_name: "required",
-                party_name: "required",
-                party_advocate: "required",
+                // party_name: "required",
+                // party_advocate: "required",
                 case_no: "required",
                 case_type: "required",
                 //case_status: "required",
