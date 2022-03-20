@@ -222,8 +222,8 @@ class LogActivity
     }
     public static function getAdvocateClientFullName($id)
     {
-        $row = AdvocateClient::where('id',$id)->first();
-        return $row->first_name.' '.$row->last_name;	
+       // $row = AdvocateClient::where('id',$id)->first();
+        //return $row->first_name.' '.$row->last_name;	
     }
     public static function generateTasks()
     {
