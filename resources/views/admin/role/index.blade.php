@@ -5,13 +5,13 @@
 
         @component('component.modal_heading',
              [
-             'page_title' => 'Role',
+             'page_title' => __("t.role"),
              'action'=>route("role.create"),
-             'model_title'=>'Create Role',
+             'model_title'=> __("t.add_role"),
              'modal_id'=>'#addtag',
               'permission' => '1'
              ] )
-            Role
+
         @endcomponent
 
 

@@ -3,7 +3,7 @@
 @section('content')
     @component('component.heading' , [
 
-    'page_title' => 'Edit Client',
+    'page_title' => __("t.add_client"),
     'action' => route('clients.index') ,
     'text' => 'Back'
      ])

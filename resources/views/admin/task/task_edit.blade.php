@@ -3,7 +3,7 @@
 @section('content')
     @component('component.heading' , [
 
-    'page_title' => 'Edit Task',
+    'page_title' => __("t.add_task"),
     'action' => route('tasks.index') ,
     'text' => 'Back'
      ])

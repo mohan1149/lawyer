@@ -3,7 +3,7 @@
 @section('content')
     <div class="page-title">
         <div class="title_left">
-            <h3>Add Appointment</h3>
+            <h3>{{ __("t.add_appointment") }}</h3>
         </div>
 
         <div class="title_right">

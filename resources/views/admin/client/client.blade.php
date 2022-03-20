@@ -3,9 +3,9 @@
 @section('content')
     <div class="">
         @component('component.heading' , [
-       'page_title' => 'Client',
+       'page_title' => __("t.client"),
        'action' => route('clients.create') ,
-       'text' => 'Add Client',
+       'text' => __("t.add_client"),
        'permission' => $adminHasPermition->can(['client_add'])
         ])
         @endcomponent

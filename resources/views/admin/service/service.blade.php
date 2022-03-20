@@ -6,9 +6,9 @@
 
         @component('component.modal_heading',
              [
-             'page_title' => 'Service',
+             'page_title' =>__("t.service"),
              'action'=>route("service.create"),
-             'model_title'=>'Create Service',
+             'model_title'=>__("t.add_service"),
              'modal_id'=>'#addtag',
              'permission' => $adminHasPermition->can(['service_add'])
              ] )

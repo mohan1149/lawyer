@@ -3,7 +3,7 @@
 @section('content')
     @component('component.heading' , [
 
-        'page_title' => 'Add Vendor',
+        'page_title' => __("t.add_vendor"),
         'action' => route('vendor.index') ,
         'text' => 'Back'
          ])

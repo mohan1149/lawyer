@@ -5,9 +5,9 @@
 
         @component('component.modal_heading',
              [
-             'page_title' => 'Court',
+             'page_title' => __("t.court"),
              'action'=>route("court.create"),
-             'model_title'=>'Create Court',
+             'model_title'=>__("t.add_court"),
              'modal_id'=>'#addtag',
               'permission' => $adminHasPermition->can(['court_add'])
              ] )

@@ -4,9 +4,9 @@
     <div class="">
         @component('component.modal_heading',
              [
-             'page_title' => 'Case Type',
+             'page_title' => __("t.case_type"),
              'action'=>route("case-type.create"),
-             'model_title'=>'Create Case Type',
+             'model_title'=>__("add_case_type"),
              'modal_id'=>'#addtag',
              'permission' => $adminHasPermition->can(['case_type_add'])
              ] )

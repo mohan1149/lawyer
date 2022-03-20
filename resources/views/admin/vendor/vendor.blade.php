@@ -4,9 +4,9 @@
     <div class="">
         @component('component.heading' , [
 
-  'page_title' => 'Vendor',
+  'page_title' => __("t.vendor"),
   'action' => route('vendor.create') ,
-  'text' => 'Add Vendor',
+  'text' => __("t.add_vendor"),
    'permission' => $adminHasPermition->can(['vendor_add'])
    ])
         @endcomponent

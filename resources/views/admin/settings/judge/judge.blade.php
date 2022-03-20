@@ -5,9 +5,9 @@
 
         @component('component.modal_heading',
              [
-             'page_title' => 'Judge',
+             'page_title' => __("t.judge"),
              'action'=>route("judge.create"),
-             'model_title'=>'Create Judge',
+             'model_title'=>__("t.add_judge"),
              'modal_id'=>'#addtag',
              'permission' => $adminHasPermition->can(['judge_add'])
              ] )

@@ -4,9 +4,9 @@
 
     <div class="">
         @component('component.heading' , [
-       'page_title' => 'Task',
+       'page_title' => __("t.task"),
        'action' => route('tasks.create') ,
-       'text' => 'Add Task',
+       'text' => __("t.add_task"),
        'permission' => $adminHasPermition->can(['task_add'])
         ])
         @endcomponent

@@ -5,9 +5,9 @@
 
         @component('component.modal_heading',
              [
-             'page_title' => 'Case Status',
+             'page_title' => __("t.case_status"),
              'action'=>route("case-status.create"),
-             'model_title'=>'Create Case Status',
+             'model_title'=>__("t.add_case_status"),
              'modal_id'=>'#addtag',
              'permission' => $adminHasPermition->can(['case_status_add'])
              ] )

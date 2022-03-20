@@ -4,9 +4,9 @@
     <div class="">
         @component('component.modal_heading',
              [
-             'page_title' => 'Expense Type',
+             'page_title' => __("t.expense_type"),
              'action'=>route("expense-type.create"),
-             'model_title'=>'Create Expense Type',
+             'model_title'=>__("t.add_expense_type"),
              'modal_id'=>'#addtag',
              'permission' => $adminHasPermition->can(['expense_type_add'])
              ] )

@@ -10,9 +10,9 @@
 
         @component('component.heading' , [
 
-       'page_title' => 'Appointment',
+       'page_title' => __("t.appointment"),
        'action' => route('appointment.create') ,
-       'text' => 'Add Appointment',
+       'text' => __("t.add_appointment"),
        'permission' => $adminHasPermition->can(['appointment_add'])
         ])
         @endcomponent

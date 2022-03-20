@@ -457,7 +457,6 @@ return [
     'judgement_history'=>"Judgement History",
     'summon'=>'Summon Date',
     'summon_next'=>'Next Summon Date',
-
     'judgement_time_lows'=>'Judgement Time Lows',
     'time_lows'=>"Time Lows",
     'number_days'=>"Number of Days",
@@ -467,8 +466,30 @@ return [
     'delete_record'=>"Once record is deleted, it will not be retrieved",
     'reg_date'=>"Registration Date",
     'j_from_date'=>"Judgement From Date",
-
-    
-
+    'add_case'=>"Add case",
+    "client"=>"Client",
+    "add_client"=>"Add Client",
+    "task"=>"Task",
+    "add_task"=>"Add Task",
+    "appointment"=>"Appointment",
+    "add_appointment"=>"Add Appointment",
+    "role"=>"Role",
+    "add_role"=>"Add Role",
+    "service"=>"Service",
+    "add_service"=>"Add Service",
+    "vendor"=>"Vendor",
+    "add_vendor"=>"Add Vendor",
+    "expense_type"=>"Expence Type",
+    "add_expense_type"=>"Add Expense Type",
+    "case_type"=>"Case Type",
+    "add_case_type"=>"Add Case Type",
+    "court_type"=>"Court Type",
+    "add_court_type"=>"Add Court Type",
+    "court"=>"Court",
+    "add_court"=>"Add Court",
+    "case_status"=>"Case Status",
+    "add_case_status"=>"Add Case Status",
+    "judge"=>"Judge",
+    "add_judge"=>"Add Judge",
 ];   
 
