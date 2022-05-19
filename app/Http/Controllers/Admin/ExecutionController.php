@@ -51,4 +51,22 @@ class ExecutionController extends Controller
             return abort(500,"Intrnal Server Error");
         }
     }
+
+    public function editExecution(Request $request){
+        try {
+            $eid = $request['id'];
+            $date = $request['exe_date'];
+            $notes = $request['exe_notes'];
+            DB::table('case_executions')
+            ->where('eid',$eid)
+            ->update([
+                'exe_date'=>$date,
+                'exe_notes'=>$notes,
+            ]);
+            return redirect('/admin/executions/view/'.$eid);
+        }catch(\Exception $e){
+            return abort(500,"Intrnal Server Error");
+        }
+        
+    }
 }

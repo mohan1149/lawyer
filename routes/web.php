@@ -215,6 +215,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
     Route::get('notices/view/{id}', 'NoticeController@viewNotice');
 
     Route::post('executions/update', 'ExecutionController@updateExecution');
+    Route::post('update/execution/{id}','ExecutionController@editExecution');
     Route::get('executions/view/{id}', 'ExecutionController@viewExecution');   
     Route::get('executions', 'ExecutionController@getExecutions');
     Route::get('case/levels','CaseLevelController@getCaseLevels');
