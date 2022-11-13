@@ -489,5 +489,6 @@ return [
     'add_case_status'=>'	إضافة حالة القضية',
     'judge'=>	'القاضي',
     'add_judge'	=>'إضافة القاضي',
+    "ctitle"=>"لقب"
     
 ];  

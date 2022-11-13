@@ -491,5 +491,6 @@ return [
     "add_case_status"=>"Add Case Status",
     "judge"=>"Judge",
     "add_judge"=>"Add Judge",
+    "ctitle"=>"Title"
 ];   
 
