@@ -73,7 +73,7 @@ class APIController extends Controller
                 ->leftJoin('court_types AS t', 't.id', '=', 'case.court_type')
                 ->leftJoin('courts AS c', 'c.id', '=', 'case.court')
                 ->leftJoin('judges AS j', 'j.id', '=', 'case.judge_type')
-                ->select('case.id AS case_id', 'case.next_date', 'case.client_position', 'case.party_name', 'case.party_lawyer', 'case.registration_number AS registration_number','case.case_number as case_number','case.filing_number as filling_number','case.registration_date as registration_date', 'case.act', 'case.priority',
+                ->select('case.id AS case_id', 'case.ctitle','case.next_date', 'case.client_position', 'case.party_name', 'case.party_lawyer', 'case.registration_number AS registration_number','case.case_number as case_number','case.filing_number as filling_number','case.registration_date as registration_date', 'case.act', 'case.priority',
                     'case.court_no', 'case.judge_name', 'ct.case_type_name AS caseType', 'cst.case_type_name AS caseSubType',
                     's.case_status_name', 't.court_type_name', 'c.court_name', 'j.judge_name', 'ac.first_name', 'ac.middle_name', 'ac.last_name', 'case.updated_by', 'ac.id AS advo_client_id','case.created_at'
                 )

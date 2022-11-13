@@ -44,7 +44,7 @@
                 <div class="contct-info">
                     <div class="form-group">
                         <label  class="discount_text"> {{__('t.next_date')}} <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control case_next_date" id="next_date" name="next_date" readonly="">
+                        <input type="date" class="form-control case_next_date" id="next_date" name="next_date">
                     </div>
                 </div>
             </div>

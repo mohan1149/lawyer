@@ -230,8 +230,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
     Route::resource('judge-time-low', 'JudgeTimeLowController');
     Route::post('add/judgement', 'CaseRunningController@addJudgement');
     Route::get('history/judgement/{id}', 'CaseRunningController@judgementHistory');
-    
-    
+    Route::get('/delete/case/{id}', 'CaseRunningController@deleteCase');    
+    Route::get('/delete/hearing/{id}', 'CaseRunningController@deleteHearing');
+    Route::get('/delete/judgement/{id}', 'CaseRunningController@deleteJudgement');
+    Route::get('/delete/level/{id}', 'CaseLevelController@deleteLevel');
+
+
     
 });
 

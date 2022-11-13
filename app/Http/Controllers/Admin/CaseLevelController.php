@@ -109,4 +109,9 @@ class CaseLevelController extends Controller
             return abort(500,'IES');
         }
     }
+    public function deleteLevel(Request $request){
+        DB::table('case_levels')->where('lid',$request['id'])->delete();
+        return redirect()->back();
+    }
+    
 }

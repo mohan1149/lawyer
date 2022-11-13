@@ -42,6 +42,12 @@
                         @endif
 
                         <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="ctitle">{{__("t.ctitle")}} <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="ctitle" id="ctitle" required>
+                                </div>
+                            </div>
                             <div class="col-md-6 col-sm-12 col-xs-12 form-group">
                                 <label for="fullname">{{__("t.client")}} <span class="text-danger">*</span></label>
                                 <select class="form-control" name="client_name" id="client_name">

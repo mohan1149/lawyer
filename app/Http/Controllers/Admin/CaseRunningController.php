@@ -605,6 +605,7 @@ class CaseRunningController extends Controller
         $index = 0;
         $case = new CourtCase();
         $case->advocate_id = "1";
+        $case->ctitle = $request->ctitle;
         $case->advo_client_id = $request->client_name;
         $case->client_position = $request->position;
         $case->party_name = $request->input('parties_detail.' . $index . '.party_name');
@@ -938,6 +939,7 @@ class CaseRunningController extends Controller
             $case = CourtCase::findorfail($id);
 
             $case->advocate_id = '1';
+            $case->ctitle = $request->ctitle;
             $case->advo_client_id = $request->client_name;
             $case->client_position = $request->position;
             $case->party_name = $request->input('parties_detail.' . $index . '.party_name');
@@ -1679,4 +1681,20 @@ class CaseRunningController extends Controller
             return abort(500,'ISE');
         }
     }
+    public function deleteCase(Request $request){
+        DB::table('court_cases')->where('id',$request['id'])->delete();
+        return redirect('/admin/case-running');
+    }
+
+    public function deleteHearing(Request $request){
+        DB::table('case_hearings')->where('hid',$request['id'])->delete();
+        return redirect()->back();
+    }
+    public function deleteJudgement(Request $request){
+        DB::table('case_judgements')->where('cjid',$request['id'])->delete();
+        return redirect()->back();
+    }
+
+    
+    
 }

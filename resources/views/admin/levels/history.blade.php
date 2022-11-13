@@ -4,6 +4,9 @@
     <div class="container" style="padding: 15px;margin:15px;margin-top:50px">
         @foreach ($levels as $level)
             <div class="panel panel-info">
+
+                <a class="btn btn-danger" href="/admin/delete/level/{{ $level->lid }}"
+                    style="float: right">{{ __('t.delete') }}</a>
                 <div class="panel-heading" style="text-align: center;font-size:20px">
                     <h2 style="text-transform: uppercase">
                         {{ __("t.".$level->case_level) }}
